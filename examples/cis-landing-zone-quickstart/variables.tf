@@ -14,6 +14,8 @@ variable "defined_tags" {
     namespace_name        = string,
     namespace_description = string,
     is_namespace_retired  = bool,
+    defined_tags          = map(string),
+    freeform_tags         = map(string)
     tags = map(object({
       name = string,
       description = string,
@@ -22,7 +24,9 @@ variable "defined_tags" {
       valid_values = list(string),
       apply_default_to_compartments = list(string),
       default_value = string,
-      is_default_required = bool
+      is_default_required = bool,
+      defined_tags          = map(string),
+      freeform_tags         = map(string)
     }))
   }))
 }

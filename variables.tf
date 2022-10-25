@@ -58,6 +58,18 @@ variable "cislz_created_on_tag_name" {
   default = null
 }
 
+variable "cislz_defined_tags" {
+  description = "Any defined tags to apply on the default namespace and tags (those prefixed with cislz_)." 
+  type = map(string)
+  default = null
+}
+
+variable "cislz_freeform_tags" {
+  description = "Any freeform tags to apply on the default namespace and tags (those prefixed with cislz_)."
+  type = map(string)
+  default = null
+}
+
 variable "defined_tags" {
   description = "A map of user defined tags, made of tag namespaces, and tags themselves along with optional tag defaults."
   type = map(object({
@@ -65,6 +77,8 @@ variable "defined_tags" {
     namespace_name        = string,
     namespace_description = string,
     is_namespace_retired  = bool,
+    defined_tags          = map(string),
+    freeform_tags         = map(string)
     tags = map(object({
       name = string,
       description = string,
@@ -73,7 +87,9 @@ variable "defined_tags" {
       valid_values = list(string),
       apply_default_to_compartments = list(string),
       default_value = string,
-      is_default_required = bool
+      is_default_required = bool,
+      defined_tags  = map(string),
+      freeform_tags = map(string)
     }))
   }))
 }

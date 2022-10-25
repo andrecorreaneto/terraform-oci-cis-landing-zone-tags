@@ -43,9 +43,11 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cislz_created_by_tag_name"></a> [cislz\_created\_by\_tag\_name](#input\_cislz\_created\_by\_tag\_name) | A user provided name for the tag to identify resource creators. Only applicable if Only applicable if *enable\_cislz\_namespace* is true and tenancy is not pre-configured with OCI tag defined by *oracle\_default\_created\_by\_tag\_name*. | `string` | `null` | no |
 | <a name="input_cislz_created_on_tag_name"></a> [cislz\_created\_on\_tag\_name](#input\_cislz\_created\_on\_tag\_name) | A user provided name for the tag to identify when resources are created. Only applicable if Only applicable if *enable\_cislz\_namespace* is true and tenancy is not pre-configured with OCI tag defined by *oracle\_default\_created\_on\_tag\_name*. | `string` | `null` | no |
+| <a name="input_cislz_defined_tags"></a> [cislz\_defined\_tags](#input\_cislz\_defined\_tags) | Any defined tags to apply on the default namespace and tags (those prefixed with cislz\_). | `map(string)` | `null` | no |
+| <a name="input_cislz_freeform_tags"></a> [cislz\_freeform\_tags](#input\_cislz\_freeform\_tags) | Any freeform tags to apply on the default namespace and tags (those prefixed with cislz\_). | `map(string)` | `null` | no |
 | <a name="input_cislz_namespace_compartment_id"></a> [cislz\_namespace\_compartment\_id](#input\_cislz\_namespace\_compartment\_id) | The compartment ocid where to create a default tag namespace. Only applicable if *enable\_cislz\_namespace* is true and tenancy is not pre-configured with OCI tag namespace defined by *oracle\_default\_namespace\_name*. | `string` | n/a | yes |
 | <a name="input_cislz_namespace_name"></a> [cislz\_namespace\_name](#input\_cislz\_namespace\_name) | A user provided name for the default namespace. Only applicable if Only applicable if *enable\_cislz\_namespace* is true and tenancy is not pre-configured with OCI tag namespace defined by *oracle\_default\_namespace\_name*. | `string` | `null` | no |
-| <a name="input_defined_tags"></a> [defined\_tags](#input\_defined\_tags) | A map of user defined tags, made of tag namespaces, and tags themselves along with optional tag defaults. | <pre>map(object({<br>    compartment_id        = string,<br>    namespace_name        = string,<br>    namespace_description = string,<br>    is_namespace_retired  = bool,<br>    tags = map(object({<br>      name = string,<br>      description = string,<br>      is_cost_tracking = bool,<br>      is_retired = bool,<br>      valid_values = list(string),<br>      apply_default_to_compartments = list(string),<br>      default_value = string,<br>      is_default_required = bool<br>    }))<br>  }))</pre> | n/a | yes |
+| <a name="input_defined_tags"></a> [defined\_tags](#input\_defined\_tags) | A map of user defined tags, made of tag namespaces, and tags themselves along with optional tag defaults. | <pre>map(object({<br>    compartment_id        = string,<br>    namespace_name        = string,<br>    namespace_description = string,<br>    is_namespace_retired  = bool,<br>    defined_tags          = map(string),<br>    freeform_tags         = map(string)<br>    tags = map(object({<br>      name = string,<br>      description = string,<br>      is_cost_tracking = bool,<br>      is_retired = bool,<br>      valid_values = list(string),<br>      apply_default_to_compartments = list(string),<br>      default_value = string,<br>      is_default_required = bool,<br>      defined_tags  = map(string),<br>      freeform_tags = map(string)<br>    }))<br>  }))</pre> | n/a | yes |
 | <a name="input_enable_cislz_namespace"></a> [enable\_cislz\_namespace](#input\_enable\_cislz\_namespace) | Whether the default namespace required by CIS OCI Benchmark is enabled. | `bool` | `false` | no |
 | <a name="input_oracle_default_created_by_tag_name"></a> [oracle\_default\_created\_by\_tag\_name](#input\_oracle\_default\_created\_by\_tag\_name) | OCI's pre-configured tag name for identifying resource creators. | `string` | `"CreatedBy"` | no |
 | <a name="input_oracle_default_created_on_tag_name"></a> [oracle\_default\_created\_on\_tag\_name](#input\_oracle\_default\_created\_on\_tag\_name) | OCI's pre-configured tag name for identifying when resources are created. | `string` | `"CreatedOn"` | no |
@@ -64,6 +66,8 @@ Tags are defined in the context of a namespace, that are defined by the followin
 - **namespace_description**: the namespace description.
 - **is_namespace_retired**: indicates whether the namespace is retired. Tags in retired namespace can no longer be applied to resources.
 - **tags**: the namespace tags.
+- **defined_tags**: any defined tags to apply on the namespace.
+- **freeform_tags**: any freeform tags to apply on the namespace.
 
 Within the tags objects:
 - **name**: defines the tag name.
@@ -74,6 +78,8 @@ Within the tags objects:
 - **apply_default_to_compartments**: defines the list of compartments to which a default value is auto assigned.
 - **default_value**: defines the auto assigned value to compartments in the list.
 - **is_default_required**: if true, sets default_value during resource creation.
+- **defined_tags**: any defined tags to apply on the tag.
+- **freeform_tags**: any freeform tags to apply on the tag.
 
 ## Outputs
 

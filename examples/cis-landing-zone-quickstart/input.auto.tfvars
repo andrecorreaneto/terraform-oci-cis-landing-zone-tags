@@ -21,7 +21,9 @@ defined_tags = {
     compartment_id : null,
     namespace_name : "cislandingzone-base-tag-namespace",  
     namespace_description : "CIS Landing Zone base tag namespace.",    
-    is_namespace_retired : false  
+    is_namespace_retired : false,  
+    defined_tags : null,
+    freeform_tags : null
     tags : {
       GROUP-ROLES-TAG : {
         name : "roles",
@@ -34,7 +36,9 @@ defined_tags = {
                         "dyn-compute-agent","dyn-database-kms","dyn-security-function","dyn-application-function"]
         apply_default_to_compartments : null,
         default_value : null,
-        is_default_required : false                
+        is_default_required : false,
+        defined_tags : null,
+        freeform_tags : null                
       },
       CMP-TYPE-TAG : {
         name : "cmp-type",
@@ -44,7 +48,9 @@ defined_tags = {
         valid_values : ["security","network","application","database","exainfra"],
         apply_default_to_compartments : null,
         default_value : null,
-        is_default_required : false 
+        is_default_required : false,
+        defined_tags : null,
+        freeform_tags : null 
       }
     } 
   }

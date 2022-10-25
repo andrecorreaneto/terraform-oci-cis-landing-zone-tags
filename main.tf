@@ -19,6 +19,8 @@ locals {
       namespace_name = local.cislz_namespace_name
       namespace_description = "CIS Landing Zone default tag namespace."
       is_namespace_retired = false
+      defined_tags = var.cislz_defined_tags
+      freeform_tags = var.cislz_freeform_tags
     }
   } : {}
 
@@ -39,6 +41,8 @@ locals {
       is_cost_tracking = true,
       is_retired = false,
       valid_values = []
+      defined_tags = var.cislz_defined_tags
+      freeform_tags = var.cislz_freeform_tags
     }
   } : {} 
 
@@ -69,6 +73,8 @@ locals {
       is_cost_tracking = false,
       is_retired = false,
       valid_values = []
+      defined_tags = var.cislz_defined_tags
+      freeform_tags = var.cislz_freeform_tags
     }
   } : {}
 
@@ -95,6 +101,8 @@ locals {
         is_cost_tracking = v2.is_cost_tracking
         is_retired = v2.is_retired
         valid_values = v2.valid_values
+        defined_tags = v2.defined_tags
+        freeform_tags = v2.freeform_tags
       }
     ]
   ])
@@ -125,7 +133,8 @@ resource "oci_identity_tag_namespace" "these" {
     name           = each.value.namespace_name
     description    = each.value.namespace_description
     is_retired     = each.value.is_namespace_retired
-
+    defined_tags   = each.value.defined_tags
+    freeform_tags  = each.value.freeform_tags
 }
 
 #-- Tags creation.
@@ -136,12 +145,16 @@ resource "oci_identity_tag" "these" {
                                                     tag_namespace_id : t.tag_namespace_id
                                                     is_cost_tracking: t.is_cost_tracking,
                                                     is_retired: t.is_retired,
-                                                    valid_values: t.valid_values}},local.cislz_created_by_tag, local.cislz_created_on_tag)
+                                                    valid_values: t.valid_values,
+                                                    defined_tags: t.defined_tags,
+                                                    freeform_tags: t.freeform_tags}},local.cislz_created_by_tag, local.cislz_created_on_tag)
     name             = each.value.name
     description      = each.value.description
     tag_namespace_id = each.value.tag_namespace_id
     is_cost_tracking = each.value.is_cost_tracking
     is_retired       = each.value.is_retired
+    defined_tags     = each.value.defined_tags
+    freeform_tags    = each.value.freeform_tags
     dynamic "validator" {
     for_each = each.value.valid_values != null ? (length(each.value.valid_values) > 0 ? [1] : []) : []
       content {
