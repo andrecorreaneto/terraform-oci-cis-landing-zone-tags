@@ -92,7 +92,7 @@ locals {
   #-- Building an array with all tags passed in defined_tags variable
   #---------------------------------------------------------------------------------------
   tags = flatten([
-    for k1,v1 in var.defined_tags : [
+    for k1,v1 in (var.defined_tags != null ? var.defined_tags : {}) : [
       for k2, v2 in v1.tags : {
         key  = k2
         name = v2.name
@@ -111,7 +111,7 @@ locals {
   #-- Building an array with all tag defaults passed in defined_tags variable
   #---------------------------------------------------------------------------------------
   tag_defaults = flatten([
-    for v1 in var.defined_tags : [
+    for v1 in (var.defined_tags != null ? var.defined_tags : {}) : [
       for k2, v2 in v1.tags : [
         for cmp in v2.apply_default_to_compartments == null ? [] : v2.apply_default_to_compartments : {
           key  = "${k2}.${cmp}"
