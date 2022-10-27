@@ -17,38 +17,47 @@
 #---------------------------------------------------------------------------------------------------------------
 
 defined_tags = {  
-  BASE-TAG-NAMESPACE  : { 
+  FINANCE-NAMESPACE  : { 
     compartment_id : null,
-    namespace_name : "cislandingzone-base-tag-namespace",  
-    namespace_description : "CIS Landing Zone base tag namespace.",    
+    namespace_name : "finance",  
+    namespace_description : "Finances division's tag namespace.",    
     is_namespace_retired : false,  
     defined_tags : null,
     freeform_tags : null
     tags : {
-      GROUP-ROLES-TAG : {
-        name : "roles",
-        description : "CIS Landing Zone group roles.",
-        is_cost_tracking : false,
+      COST-CENTER-TAG : {
+        name : "cost-center",
+        description : "Cost center.",
+        is_cost_tracking : true,
         is_retired : false,
-        valid_values : ["iam-admin","cred-admin","cost-admin","security-admin",
-                        "network-admin","application-admin","database-admin","exainfra-admin",
-                        "storage-admin","auditor","announcement-reader",
-                        "dyn-compute-agent","dyn-database-kms","dyn-security-function","dyn-application-function"]
-        apply_default_to_compartments : null,
+        valid_values : ["a1","b1","c1"] # tag values are checked against these values upon resource tagging.
+        apply_default_to_compartments : null, # ["ocid1","ocid2","ocidN"] Optional, provide a list of compartment ocids where you want to apply the default_value.
         default_value : null,
-        is_default_required : false,
+        is_default_required : true,
         defined_tags : null,
         freeform_tags : null                
       },
-      CMP-TYPE-TAG : {
-        name : "cmp-type",
-        description : "CIS Landing Zone compartment type.",
+      ENVIRONMENT-TAG : {
+        name : "environment-class",
+        description : "Environment class. high for production, low for others, like development, test, sandbox etc.",
         is_cost_tracking : false,
         is_retired : false,
-        valid_values : ["security","network","application","database","exainfra"],
-        apply_default_to_compartments : null,
+        valid_values : ["high","low"], # tag values are checked against these values upon resource tagging.
+        apply_default_to_compartments : null, # ["ocid1","ocid2","ocidN"] Optional, provide a list of compartment ocids where you want to apply the default_value.
         default_value : null,
-        is_default_required : false,
+        is_default_required : true,
+        defined_tags : null,
+        freeform_tags : null 
+      },
+      RESOURCE-ID-TAG : {
+        name : "resource-id",
+        description : "A random resource id, used to communicate any business-specific metadata about resources",
+        is_cost_tracking : false,
+        is_retired : false,
+        valid_values : null, # no checks upon resource tagging
+        apply_default_to_compartments : null, # ["ocid1","ocid2","ocidN"] Optional, provide a list of compartment ocids where you want to apply the default_value.
+        default_value : null,
+        is_default_required : true,
         defined_tags : null,
         freeform_tags : null 
       }

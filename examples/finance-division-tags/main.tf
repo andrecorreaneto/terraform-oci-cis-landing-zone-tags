@@ -4,10 +4,12 @@
 module "cislz_tags" {
   source                         = "../../"
   tenancy_id                     = var.tenancy_id
+
+  #-- Enabling tag namespace required by CIS
   enable_cislz_namespace         = true
   cislz_namespace_compartment_id = var.tenancy_id
-  tag_name_prefix                = "cislandingzone"
-  defined_tags                   = var.defined_tags
-  oracle_default_namespace_name = "test"
-  cislz_freeform_tags            = {"cis-landing-zone":"quickstart"}
+  cislz_freeform_tags            = {"cis-landing-zone":"cislz"}
+
+  #-- The map of defined tags to manage 
+  defined_tags = var.defined_tags
 }
