@@ -6,17 +6,17 @@ variable "tenancy_id" {
   type = string
 } 
 
-variable "tag_name_prefix" {
-  description = "A string used as a prefix for resource naming."
-  type = string
-} 
-
 variable "enable_cislz_namespace" {
   description = "Whether the default namespace required by CIS OCI Benchmark is enabled."
   type = bool
-  default = false
+  default = true
 }
 
+variable "cislz_tag_name_prefix" {
+  description = "A string used as a prefix for resource naming."
+  type = string
+  default = "cislz"
+}
 variable "cislz_namespace_compartment_id" {
   description = "The compartment ocid where to create a default tag namespace. Only applicable if *enable_cislz_namespace* is true and tenancy is not pre-configured with OCI tag namespace defined by *oracle_default_namespace_name*."
   type = string

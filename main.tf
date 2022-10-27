@@ -8,9 +8,9 @@ locals {
   #-- CIS required namespace - only if Oracle-Tags namespace is not defined
   #---------------------------------------------------------------------------
   #-- Naming
-  cislz_namespace_key = "${var.tag_name_prefix}-namesp"
+  cislz_namespace_key = "${var.cislz_tag_name_prefix}-namesp"
   default_cislz_namespace_name = "namesp"
-  cislz_namespace_name = var.cislz_namespace_name != null ? var.cislz_namespace_name : "${var.tag_name_prefix}-${local.default_cislz_namespace_name}"
+  cislz_namespace_name = var.cislz_namespace_name != null ? var.cislz_namespace_name : "${var.cislz_tag_name_prefix}-${local.default_cislz_namespace_name}"
 
   #-- The namespace itself
   cislz_namespace = var.enable_cislz_namespace && length(data.oci_identity_tag_namespaces.oracle_default.tag_namespaces) == 0 ? {
@@ -128,7 +128,7 @@ locals {
 #-- Tag namespaces creation. 
 #-- It loops through a merged map of defined_tags variable and the optional local cislz_namespace (contingent to Oracle-Tags namespace unexistence) 
 resource "oci_identity_tag_namespace" "these" {
-  for_each = merge(var.defined_tags,local.cislz_namespace)
+  for_each = merge(var.defined_tags != null ? var.defined_tags : {}, local.cislz_namespace)
     compartment_id = each.value.compartment_id != null ? each.value.compartment_id : var.tenancy_id
     name           = each.value.namespace_name
     description    = each.value.namespace_description
