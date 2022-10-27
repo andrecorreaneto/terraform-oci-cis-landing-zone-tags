@@ -92,4 +92,5 @@ variable "defined_tags" {
       freeform_tags = map(string)
     }))
   }))
+  default = {}
 }
