@@ -21,7 +21,7 @@ Here's how these resources appear in OCI Console:
 ![Resource id tag](images/resource-id-tag.PNG)
 
 ## Using this example
-* Prepare one variable file named `terraform.tfvars` with the required IAM information. The contents of `terraform.tfvars` should look something like the following (or copy and re-use the contents of `terraform.tfvars.template`:
+1. Prepare one variable file named *terraform.tfvars* with the required information for authenticating to OCI. The contents of *terraform.tfvars* should look something like the following (or copy and re-use the contents of *terraform.tfvars.template*):
 
 ```
 ### TENANCY DETAILS
@@ -45,7 +45,7 @@ private_key_password=""
 home_region="<your tenancy home region>"
 ```
 
-Check the provided `input.auto.tfvars` file. It has a single variable named *defined_tags*:
+2. Check the provided *input.auto.tfvars* file. It has a single variable named *defined_tags*:
 
 ```
 defined_tags = {  
@@ -98,7 +98,7 @@ defined_tags = {
 }  
 ```
 
-Check the provided main.tf file. It calls the underlying tags module for resource management.
+3. Check the provided *main.tf* file. It calls the underlying tags module for resource management.
 
 `main.tf`:
 
@@ -118,8 +118,7 @@ module "cislz_tags" {
 
 ```
 
-
-Then execute the example using the usual Terraform workflow:
+4. Then execute the example using the usual Terraform workflow:
 
 ```
 $ terraform init
